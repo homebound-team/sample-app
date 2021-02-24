@@ -2,6 +2,7 @@ import { addResolversToSchema } from "@graphql-tools/schema";
 import Fastify, { FastifyInstance } from "fastify";
 import { GraphQLSchema } from "graphql";
 import Mercurius from "mercurius";
+import { Context, newAppContextForStage } from "src/context";
 import { resolvers } from "src/resolvers";
 import { loadGqlSchema } from "src/schema";
 
@@ -12,7 +13,7 @@ import { loadGqlSchema } from "src/schema";
  * when the application is closed, i.e. there isn't a great way to observe "app is shutting down"
  * from within the fastify/GraphQL APIs.
  */
-export async function createApp(context: any): Promise<FastifyInstance> {
+export async function createApp(context: Context): Promise<FastifyInstance> {
   const app = Fastify();
 
   void app.register(Mercurius, {
@@ -46,8 +47,8 @@ export async function createExecutableSchema(): Promise<GraphQLSchema> {
 if (require.main === module) {
   (async (): Promise<void> => {
     // await runMigrationsIfNeeded();
-    // const context = await newAppContextForStage();
-    const app = await createApp(null);
+    const context = await newAppContextForStage();
+    const app = await createApp(context);
     app.listen({ port: 4000 }, () => {
       console.log(`🚀 Server ready at http://localhost:4000/playground`);
     });
