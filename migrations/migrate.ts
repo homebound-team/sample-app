@@ -19,7 +19,6 @@ export async function runMigrationsIfNeeded(
 ): Promise<void> {
   const { dir = productionDirectory, overrides = {} } = opts;
   const config = newPgConnectionConfig(overrides);
-  console.log("config", config);
   const client = new Client(config);
   await client.connect();
   return new Promise((resolve, reject) => {
