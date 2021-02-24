@@ -1,0 +1,78 @@
+version: "3.1"
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: ./db.dockerfile
+      args:
+        TEST_PARALLELISM: ${TEST_PARALLELISM:-8}
+    environment:
+      - POSTGRES_PASSWORD=admin-local
+    ports:
+      - 5434:5432
+
+  graphql:
+    build:
+      context: ./
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    command: ./node_modules/.bin/ts-node-dev -C ttypescript --inspect=0.0.0.0:9229 -- src/server.ts
+    depends_on:
+      - db
+    env_file:
+      - env/local.env
+      - env/docker-overrides.env
+    volumes:
+      - ./tsconfig.json:/home/node/app/tsconfig.json
+      - ./schema:/home/node/app/schema
+      - ./src:/home/node/app/src
+      - ./migrations:/home/node/app/migrations
+      - ./node_modules:/home/node/app/node_modules
+    ports:
+      - 4000:4000
+      - 9230:9229
+
+  # Tests booting against compiled JS output
+  boot-test:
+    build:
+      context: ./
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    depends_on:
+      - db-wait
+    env_file:
+      - env/test.env
+      - env/docker-overrides.env
+    ports:
+      - 4000:4000
+
+  # Runs tests b/c accessing the `db` service in CI is easiest from another service
+  tests:
+    build:
+      context: .
+      dockerfile: ./tests.dockerfile
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    depends_on:
+      - db-wait
+    env_file:
+      - env/test.env
+      - env/docker-overrides.env
+    environment:
+      - TEST_PARALLELISM=${TEST_PARALLELISM:-8}
+    volumes:
+      - ./coverage:/home/node/app/coverage
+      - ./.jest-cache:/home/node/app/.jest-cache
+
+  db-wait:
+    image: jwilder/dockerize
+    command: dockerize -wait tcp://db:5432 -timeout 1m
+    depends_on:
+      - db
+
+  boot-test-wait:
+    image: jwilder/dockerize
+    command: dockerize -wait tcp://boot-test:4000 -timeout 3m
+    depends_on:
+      - boot-test
