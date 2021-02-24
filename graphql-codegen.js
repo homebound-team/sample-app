@@ -7,7 +7,7 @@ module.exports = {
   generates: {
     "src/generated/graphql-types.ts": {
       config: {
-        // contextType: "src/context#Context",
+        contextType: "src/context#Context",
         noSchemaStitching: true,
         avoidOptionals: true,
         scaffolding: {
