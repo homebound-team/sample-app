@@ -8,4 +8,4 @@
 #  export $(grep -v '^#' "./env/$STAGE.env" | sed 's/\"/\\\"/g' | xargs)
 #fi
 
-./node_modules/.bin/ts-node -r tsconfig-paths/register --transpile-only "$@"
+./node_modules/.bin/ts-node -C ttypescript "$@"
