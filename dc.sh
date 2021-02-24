@@ -8,6 +8,11 @@ IFS=$'\t\n'
 #
 # Based on https://github.com/dryewo/make-sh
 
+cmd_db() {
+	docker-compose up db-wait
+	npm run migrate
+}
+
 cmd_build() {
   docker-compose build
 }

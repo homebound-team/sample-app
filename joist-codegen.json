@@ -1,0 +1,13 @@
+{
+  "codegenPlugins": [],
+  "entities": {
+    "Author": { "tag": "a" },
+    "Book": { "tag": "b" },
+    "BookAdvance": { "tag": "ba" },
+    "BookReview": { "tag": "br" },
+    "Image": { "tag": "i" },
+    "Publisher": { "tag": "p" },
+    "Tag": { "tag": "t" }
+  },
+  "entitiesDirectory": "./src/entities"
+}

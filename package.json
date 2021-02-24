@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "scripts": {
     "start": "./run.sh src/server.ts",
+    "migrate": "./run.sh migrations/migrate.ts",
     "build": "ttsc",
-    "graphql-codegen": "graphql-codegen --config graphql-codegen.js",
     "format": "prettier --loglevel warn --write \"**/*.{ts,tsx,css,md}\"",
-    "posttest": "npm run format"
+    "posttest": "npm run format",
+    "graphql-codegen": "graphql-codegen --config graphql-codegen.js",
+    "joist-codegen": "./run.sh node_modules/joist-codegen",
+    "codegen": "npm run graphql-codegen && npm run joist-codegen"
   },
   "engines": {
     "node": ">=14.8.0"
@@ -19,7 +22,8 @@
     "node-pg-migrate": "^5.9.0",
     "joist-orm": "^1.0.586",
     "joist-migration-utils": "^1.0.586",
-    "mercurius": "^6.9.0"
+    "mercurius": "^6.9.0",
+    "ts-app-env": "^1.2.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.17.8",

@@ -1,0 +1,9 @@
+package-lock.json -diff
+graphql-codegen-joist.js -diff linguist-generated=true
+src/entities/*Codegen.ts -diff linguist-generated=true
+src/entities/entities.ts -diff linguist-generated=true
+src/entities/factories.ts -diff linguist-generated=true
+src/entities/metadata.ts -diff linguist-generated=true
+src/resolvers/queries/index.ts -diff linguist-generated=true
+src/resolvers/mutations/index.ts -diff linguist-generated=true
+src/resolvers/objects/index.ts -diff linguist-generated=true

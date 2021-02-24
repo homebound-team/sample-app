@@ -10,7 +10,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=admin-local
     ports:
-      - 5434:5432
+      - 5432:5432
 
   graphql:
     build:
@@ -31,7 +31,7 @@ services:
       - ./node_modules:/home/node/app/node_modules
     ports:
       - 4000:4000
-      - 9230:9229
+      - 9229:9229
 
   # Tests booting against compiled JS output
   boot-test:
