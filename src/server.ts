@@ -15,8 +15,6 @@ import { loadGqlSchema } from "src/schema";
 export async function createApp(context: any): Promise<FastifyInstance> {
   const app = Fastify();
 
-  const { stats, } = context;
-
   void app.register(Mercurius, {
     schema: await createExecutableSchema(),
     graphiql: "playground",
@@ -26,7 +24,6 @@ export async function createApp(context: any): Promise<FastifyInstance> {
   });
 
   app.get("/health", (req, res) => {
-    stats.increment("healthcheck");
     void res.send("Good");
   });
 
@@ -34,15 +31,15 @@ export async function createApp(context: any): Promise<FastifyInstance> {
 }
 
 export async function createExecutableSchema(): Promise<GraphQLSchema> {
-    return addResolversToSchema({
-      schema: await loadGqlSchema(),
-      resolvers: { ...(resolvers as any) },
-      resolverValidationOptions: {
-        // Our entity resolvers liberally map the backend types to functions that
-        // might not be exposed in the GraphQL schema yet, which is fine.
-        allowResolversNotInSchema: true,
-      },
-    });
+  return addResolversToSchema({
+    schema: await loadGqlSchema(),
+    resolvers: { ...(resolvers as any) },
+    resolverValidationOptions: {
+      // Our entity resolvers liberally map the backend types to functions that
+      // might not be exposed in the GraphQL schema yet, which is fine.
+      allowResolversNotInSchema: true,
+    },
+  });
 }
 
 // start the app when this file is run directly
