@@ -1,4 +1,4 @@
-// const { mappers, enumValues } = require("./graphql-codegen-joist");
+const { mappers, enumValues } = require("./graphql-codegen-joist");
 
 module.exports = {
   overwrite: true,
@@ -13,15 +13,11 @@ module.exports = {
         scaffolding: {
           ignoreObjectsPattern: "Detail$",
         },
-        // scalars: {
-        //   DateTime: "Date",
-        // },
-        // mappers: {
-        //   ...otherMappers,
-        // },
-        // enumValues: {
-        //   ...enumValues,
-        // },
+        scalars: {
+          DateTime: "Date",
+        },
+        mappers,
+        enumValues,
       },
       plugins: [
         "@homebound/graphql-typescript-simple-resolvers",

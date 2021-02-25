@@ -1,0 +1,25 @@
+type BookReview {
+  id: ID!
+  rating: Int!
+  isPublic: Boolean!
+  createdAt: Date!
+  updatedAt: Date!
+  book: Book!
+}
+
+extend type Mutation {
+  saveBookReview(input: SaveBookReviewInput!): SaveBookReviewResult!
+}
+
+input SaveBookReviewInput {
+  id: ID
+  rating: Int
+  isPublic: Boolean
+  createdAt: Date
+  updatedAt: Date
+  bookId: ID
+}
+
+type SaveBookReviewResult {
+  bookReview: BookReview!
+}

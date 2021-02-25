@@ -9,6 +9,7 @@ import {
   EnumFieldSerde,
   DecimalToNumberSerde,
 } from "joist-orm";
+import { Context } from "src/context";
 import {
   Author,
   authorConfig,
@@ -36,7 +37,7 @@ import {
   PublisherSizes,
 } from "./entities";
 
-export class EntityManager extends EntityManager1<{}> {}
+export class EntityManager extends EntityManager1<Context> {}
 
 export function getEm(e: BaseEntity): EntityManager {
   return e.__orm.em as EntityManager;

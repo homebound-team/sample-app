@@ -1,0 +1,25 @@
+type BookAdvance {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+  status: AdvanceStatus!
+  book: Book!
+  publisher: Publisher!
+}
+
+extend type Mutation {
+  saveBookAdvance(input: SaveBookAdvanceInput!): SaveBookAdvanceResult!
+}
+
+input SaveBookAdvanceInput {
+  id: ID
+  createdAt: Date
+  updatedAt: Date
+  status: AdvanceStatus
+  bookId: ID
+  publisherId: ID
+}
+
+type SaveBookAdvanceResult {
+  bookAdvance: BookAdvance!
+}

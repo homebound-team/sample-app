@@ -1,0 +1,32 @@
+type Publisher {
+  id: ID!
+  name: String!
+  latitude: Int
+  longitude: Int
+  hugeNumber: Int
+  createdAt: Date!
+  updatedAt: Date!
+  size: PublisherSize
+  authors: [Author!]!
+  bookAdvances: [BookAdvance!]!
+  images: [Image!]!
+}
+
+extend type Mutation {
+  savePublisher(input: SavePublisherInput!): SavePublisherResult!
+}
+
+input SavePublisherInput {
+  id: ID
+  name: String
+  latitude: Int
+  longitude: Int
+  hugeNumber: Int
+  createdAt: Date
+  updatedAt: Date
+  size: PublisherSize
+}
+
+type SavePublisherResult {
+  publisher: Publisher!
+}

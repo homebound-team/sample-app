@@ -1,0 +1,42 @@
+type Author {
+  id: ID!
+  firstName: String!
+  lastName: String
+  initials: String!
+  numberOfBooks: Int!
+  isPopular: Boolean
+  age: Int
+  graduated: Date
+  wasEverPopular: Boolean
+  createdAt: Date!
+  updatedAt: Date!
+  mentor: Author
+  publisher: Publisher
+  authors: [Author!]!
+  books: [Book!]!
+  image: Image
+}
+
+extend type Mutation {
+  saveAuthor(input: SaveAuthorInput!): SaveAuthorResult!
+}
+
+input SaveAuthorInput {
+  id: ID
+  firstName: String
+  lastName: String
+  initials: String
+  numberOfBooks: Int
+  isPopular: Boolean
+  age: Int
+  graduated: Date
+  wasEverPopular: Boolean
+  createdAt: Date
+  updatedAt: Date
+  mentorId: ID
+  publisherId: ID
+}
+
+type SaveAuthorResult {
+  author: Author!
+}

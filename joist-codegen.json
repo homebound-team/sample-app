@@ -1,5 +1,6 @@
 {
-  "codegenPlugins": [],
+  "codegenPlugins": ["joist-graphql-codegen"],
+  "contextType": "Context@src/context",
   "entities": {
     "Author": { "tag": "a" },
     "Book": { "tag": "b" },

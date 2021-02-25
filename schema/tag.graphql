@@ -1,0 +1,22 @@
+type Tag {
+  id: ID!
+  name: String!
+  createdAt: Date!
+  updatedAt: Date!
+  books: [Book!]!
+}
+
+extend type Mutation {
+  saveTag(input: SaveTagInput!): SaveTagResult!
+}
+
+input SaveTagInput {
+  id: ID
+  name: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+type SaveTagResult {
+  tag: Tag!
+}

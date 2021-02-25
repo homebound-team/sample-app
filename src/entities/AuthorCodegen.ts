@@ -45,6 +45,7 @@ import {
   publisherMeta,
   imageMeta,
 } from "./entities";
+import { Context } from "src/context";
 
 export type AuthorId = Flavor<string, "Author">;
 
@@ -120,7 +121,7 @@ export interface AuthorOrder {
   publisher?: PublisherOrder;
 }
 
-export const authorConfig = new ConfigApi<Author, {}>();
+export const authorConfig = new ConfigApi<Author, Context>();
 
 authorConfig.addRule(newRequiredRule("firstName"));
 authorConfig.addRule(newRequiredRule("initials"));

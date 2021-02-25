@@ -37,6 +37,7 @@ import {
   bookAdvanceMeta,
   imageMeta,
 } from "./entities";
+import { Context } from "src/context";
 
 export type PublisherId = Flavor<string, "Publisher">;
 
@@ -90,7 +91,7 @@ export interface PublisherOrder {
   size?: OrderBy;
 }
 
-export const publisherConfig = new ConfigApi<Publisher, {}>();
+export const publisherConfig = new ConfigApi<Publisher, Context>();
 
 publisherConfig.addRule(newRequiredRule("name"));
 publisherConfig.addRule(newRequiredRule("createdAt"));
