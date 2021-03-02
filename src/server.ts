@@ -48,6 +48,7 @@ if (require.main === module) {
   (async (): Promise<void> => {
     // await runMigrationsIfNeeded();
     const context = await newAppContextForStage();
+    // @ts-ignore
     const app = await createApp(context);
     app.listen({ port: 4000 }, () => {
       console.log(`🚀 Server ready at http://localhost:4000/playground`);

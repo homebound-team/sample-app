@@ -19,6 +19,7 @@
     "@graphql-tools/load": "^6.2.2",
     "@graphql-tools/schema": "^6.2.2",
     "fastify": "^3.9.2",
+    "graphql-scalars": "^1.2.7",
     "node-pg-migrate": "^5.9.0",
     "joist-orm": "^1.0.586",
     "joist-migration-utils": "^1.0.586",

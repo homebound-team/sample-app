@@ -1,6 +1,8 @@
 scalar Date
 scalar DateTime
 
+type Mutation
+
 type Query {
   testQuery: Int!
 }
